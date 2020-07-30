@@ -10,6 +10,7 @@ const TrailsList = ({ trailResults }) => {
       <FlatList 
         data={trailResults}
         showsVerticalScrollIndicator={false}
+        keyExtractor={(trail) => trail.name} 
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() => navigation.navigate('Trail', {
@@ -17,7 +18,7 @@ const TrailsList = ({ trailResults }) => {
             })}
           >
             <View style={styles.resultContainer}>
-              <Text style={{fontWeight: 'bold'}}>{item.name}</Text>
+              <Text style={styles.title}>{item.name}</Text>
               <Text>{item.location}</Text>
               <Image style={styles.image} source={{uri: item.imgMedium}} /> 
             </View>
@@ -40,6 +41,10 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 100,
     resizeMode: 'cover'
+  },
+  title: {
+    fontWeight: 'bold',
+    fontSize: 20
   }
 })
 

@@ -1,10 +1,20 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useReducer } from 'react'
+import { View, Text, StyleSheet, Button, TextInput } from 'react-native'
+import { useSelector, useDispatch  } from 'react-redux'
+import { increment, decrement } from '../store/actions'
 
 const HomeScreen = props => {
+  const data = useSelector(state => state)
+  const { counter } = data
+  const dispatch = useDispatch()
+
   return(
     <View style={styles.container}>
       <Text style={styles.title}>happy trails</Text>
+      <Text>{counter}</Text>
+      <TextInput placeholder="Add name" />
+      <Button title="increment" onPress={() => dispatch(increment())} />
+      <Button title="decrement" onPress={() => dispatch(decrement())} />
     </View>
   )
 }

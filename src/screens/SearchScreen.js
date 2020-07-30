@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import TrailsList from '../components/TrailsList'
 import SearchBar from '../components/SearchBar'
 import useTrailResults from '../hooks/useTrailResults'
@@ -32,13 +32,15 @@ const SearchScreen = () => {
         placeholder='Longitude'
         handleChange={handleLongitude}
       />
-
-      <TouchableOpacity
-        style={styles.submitButton}
-        onPress={handleSubmit}
-      >
-        <Text>Submit</Text>
-      </TouchableOpacity>
+      
+      <View style={styles.submitWrapper}>
+        <TouchableOpacity
+          style={styles.submitButton}
+          onPress={handleSubmit}
+        >
+          <Text style={styles.submit}>Submit</Text>
+        </TouchableOpacity>
+      </View>
       
       <TrailsList 
         trailResults={trailResults}
@@ -55,6 +57,18 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30
+  },
+  submit: {
+    fontSize: 20,
+    backgroundColor: '#1ba274',
+    borderRadius: 5,
+    color: 'white',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    padding: 10
+  },
+  submitWrapper: {
+    alignItems: 'center'
   }
 })
 
