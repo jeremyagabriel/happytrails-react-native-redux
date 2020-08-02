@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Input, Text } from 'react-native-elements'
-import { useDispatch } from 'react-redux'
-import { signin } from '../store/actions'
+import { useSelector } from 'react-redux'
+import useSignIn from '../hooks/useSignIn'
 
-const SignInScreen = ({ navigation}) => {
+const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const dispatch = useDispatch()
+  const errorMessage = useSelector(state => state.signInError)
+  const [signInCall] = useSignIn()
 
   return(
     <View style={styles.container}>
@@ -27,9 +28,10 @@ const SignInScreen = ({ navigation}) => {
         autoCorrect={false}
         secureTextEntry
       />
+      {errorMessage.length > 0 && <Text style={styles.errorMessage}>{errorMessage}</Text>}
       <Button 
         title="Sign In"
-        onPress={()=>dispatch(signin())}
+        onPress={()=>signInCall({ email, password })}
       />
       <Button
         title="Don't have an account? Sign up."
@@ -45,6 +47,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  errorMessage: {
+    fontSize: 16,
+    color: 'red',
+    marginBottom: 15,
+    textAlign: 'center'
   }
 })
 

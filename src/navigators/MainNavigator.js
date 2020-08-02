@@ -1,8 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import HomeScreen from '../screens/HomeScreen'
-import DashboardScreen from '../screens/DashboardScreen'
 import TrailNavigator from './TrailNavigator'
+import DashboardNavigator from './DashboardNavigator'
+import AccountNavigator from './AccountNavigator'
 
 const Tab = createBottomTabNavigator()
     
@@ -12,8 +13,9 @@ const MainNavigator = () => {
       <Tab.Screen name="Home">
         {(props) => <HomeScreen {...props} /> }
       </Tab.Screen>
-      <Tab.Screen name="Dashboard" component={DashboardScreen} />
       <Tab.Screen name="Search" component={TrailNavigator} />
+      <Tab.Screen name="Dashboard" component={DashboardNavigator} />
+      <Tab.Screen name="Account" component={AccountNavigator} />
     </Tab.Navigator>
   )
 }

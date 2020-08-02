@@ -1,17 +1,11 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Button, Text } from 'react-native-elements'
-import useSignOut from '../hooks/useSignOut'
 
-const AccountScreen = props => {
-  const [signOutCall] = useSignOut()
-
+const ActivityScreen = props => {
   return(
     <View style={styles.container}>
-      <Button
-        title="Sign Out"
-        onPress={()=>signOutCall()}
-      />
+      <Text>Your Activity</Text>
     </View>
   )
 }
@@ -24,4 +18,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default AccountScreen
+export default ActivityScreen

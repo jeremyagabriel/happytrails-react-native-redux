@@ -1,4 +1,5 @@
 import * as Actions from './actionTypes'
+import AsyncStorage from '@react-native-community/async-storage'
 
 const initialState = {
   token: null,

@@ -1,10 +1,10 @@
 import * as Actions from './actionTypes'
 
-export const signin = () => ({
+export const signIn = () => ({
   type: Actions.SIGNIN
 })
 
-export const signout = () => ({
+export const signOut = () => ({
   type: Actions.SIGNOUT
 })
 
