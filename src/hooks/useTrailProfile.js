@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setTrailCurrent } from '../store/actions'
 
 export default () => {
-  const [trailData, setTrailData] = useState([])
+  const dispatch = useDispatch()
 
   const getTrail = async (id) => {
     try {
@@ -10,12 +11,12 @@ export default () => {
 
       if (response.ok) {
         console.log("Trail Data:",data.trails[0])
-        setTrailData(data.trails[0])
+        dispatch(setTrailCurrent(data.trails[0]))
       }
     } catch (err) {
       console.log(err)
     }
   }
 
-  return [getTrail, trailData]
+  return [getTrail]
 }

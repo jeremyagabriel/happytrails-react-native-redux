@@ -1,10 +1,20 @@
+require('./models/User')
+require('./models/Favorite')
+require('dotenv/config')
 const express = require('express')
 const mongoose = require('mongoose')
-
+const bodyParser = require('body-parser')
+const authRoutes = require('./routes/authRoutes')
+const favoriteRoutes = require('./routes/favoriteRoutes')
+const requireAuth = require('./middlewares/requireAuth')
 
 const app = express()
 
-const mongoUri = 'mongodb+srv://admin:P@ssw0rd@cluster0.j7vri.mongodb.net/<dbname>?retryWrites=true&w=majority'
+app.use(bodyParser.json())
+app.use(authRoutes)
+app.use(favoriteRoutes)
+
+const mongoUri = process.env.DB_CONNECTION
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useCreateIndex: true,
@@ -17,8 +27,8 @@ mongoose.connection.on('error', (err) => {
   console.error('Error connecting to mongo', err)
 })
 
-app.get('/', (req, res) => {
-  res.send('Hi there!')
+app.get('/', requireAuth, (req, res) => {
+  res.send(`Your email: ${req.user.email}`)
 })
 
 app.listen(3000, () => {

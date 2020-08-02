@@ -1,42 +1,34 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import TrailsList from '../components/TrailsList'
-import SearchBar from '../components/SearchBar'
+import SearchBarComponent from '../components/SearchBar'
 import useTrailResults from '../hooks/useTrailResults'
+import { useSelector } from 'react-redux'
 
 const SearchScreen = () => {
   const [lat, setLat] = useState()
   const [lon, setLon] = useState()
-  const [getTrails, trailResults] = useTrailResults()
-
-  const handleLatitude = e => {
-    setLat(e)
-  }
-
-  const handleLongitude = e => {
-    setLon(e)
-  }
-
-  const handleSubmit = e => {
-    getTrails(lat, lon)
-  }
+  const [getTrails] = useTrailResults()
+  const trailResults = useSelector(state => state.trailResults)
 
   return(
     <ScrollView style={styles.container}>
-      <SearchBar 
+      <SearchBarComponent
         placeholder='Latitude'
-        handleChange={handleLatitude}
+        handleChange={setLat}
+        value={lat}
       />
 
-      <SearchBar 
+      <SearchBarComponent
         placeholder='Longitude'
-        handleChange={handleLongitude}
+        handleChange={setLon}
+        value={lon}
       />
       
       <View style={styles.submitWrapper}>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={handleSubmit}
+          onPress={() => getTrails(lat, lon)}
         >
           <Text style={styles.submit}>Submit</Text>
         </TouchableOpacity>

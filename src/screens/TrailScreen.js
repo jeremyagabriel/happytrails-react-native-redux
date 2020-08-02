@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
+import { Button } from 'react-native-elements'
 import useTrailProfile from '../hooks/useTrailProfile'
-import { useSelector, useDispatch  } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 const TrailScreen = ({ route }) => {
-  const [getTrail, trailData] = useTrailProfile()
+  const [getTrail] = useTrailProfile()
   const { id } = route.params
-  const data = useSelector(state => state)
-  const { counter } = data
+  const trailCurrent = useSelector(state => state.trailCurrent)
 
   useEffect(() => {
     getTrail(id)
@@ -15,9 +15,11 @@ const TrailScreen = ({ route }) => {
 
   return(
     <View style={styles.container}>
-      <Image style={styles.image} source={{uri: trailData.imgMedium}} />
-      <Text style={styles.title}>{trailData.name}</Text>
-      <Text>{counter}</Text>
+      <Image style={styles.image} source={{uri: trailCurrent.imgMedium}} />
+      <Text style={styles.title}>{trailCurrent.name}</Text>
+      <Button
+        title="Add to Favorites"
+      />
     </View>
   )
 }

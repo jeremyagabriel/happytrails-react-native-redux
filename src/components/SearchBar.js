@@ -1,13 +1,15 @@
 import React from 'react'
 import { StyleSheet, Text, View, TextInput } from 'react-native'
+import { SearchBar } from 'react-native-elements'
 
-const SearchBar = props => {
+const SearchBarComponent = props => {
   return(
     <View>
-      <TextInput
-        style={styles.searchBox} 
+      <SearchBar
         placeholder={props.placeholder}
-        onChangeText={props.handleChange}
+        onChangeText={(e) => props.handleChange(e)}
+        platform="ios"
+        value={props.value}
       />
     </View>
   )
@@ -23,4 +25,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default SearchBar
+export default SearchBarComponent
