@@ -7,7 +7,7 @@ import useSignUp from '../hooks/useSignUp'
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const errorMessage = useSelector(state => state.signUpError)
+  const errorMessage = useSelector(state => state.auth.signUpError)
   const [signUp] = useSignUp()
 
   return(

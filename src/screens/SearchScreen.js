@@ -9,7 +9,7 @@ const SearchScreen = () => {
   const [lat, setLat] = useState()
   const [lon, setLon] = useState()
   const [getTrails] = useTrailResults()
-  const trailResults = useSelector(state => state.trailResults)
+  const trailResults = useSelector(state => state.search.trailResults)
 
   return(
     <ScrollView style={styles.container}>

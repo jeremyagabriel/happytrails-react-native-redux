@@ -1,0 +1,1 @@
+export const SET_TRAIL_RESULTS = 'SET_TRAIL_RESULTS'

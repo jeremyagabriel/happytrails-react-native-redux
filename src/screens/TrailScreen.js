@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 const TrailScreen = ({ route }) => {
   const [getTrail] = useTrailProfile()
   const { id } = route.params
-  const trailCurrent = useSelector(state => state.trailCurrent)
+  const trailCurrent = useSelector(state => state.trail.trailCurrent)
 
   useEffect(() => {
     getTrail(id)

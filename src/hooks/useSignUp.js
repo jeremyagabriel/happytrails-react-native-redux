@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import { useDispatch } from 'react-redux'
-import { signin, addSignUpError, signUp } from '../store/actions'
+import { signin, addSignUpError, signUp } from '../store/auth/actions'
 
 
 export default () => {

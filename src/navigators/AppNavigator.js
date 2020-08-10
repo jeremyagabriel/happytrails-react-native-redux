@@ -4,10 +4,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { useSelector, useDispatch } from 'react-redux'
 import MainNavigator from './MainNavigator'
 import AuthNavigator from './AuthNavigator'
-import { signIn } from '../store/actions'
+import { signIn } from '../store/auth/actions'
 
 const AppNavigator = () => {
-  const token = useSelector(state => state.token)
+  const token = useSelector(state => state.auth.token)
   const dispatch = useDispatch()
 
   useEffect(() => {

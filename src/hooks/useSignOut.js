@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 import { useDispatch } from 'react-redux'
-import { signOut } from '../store/actions'
+import { signOut } from '../store/auth/actions'
 
 export default () => {
   const dispatch = useDispatch()

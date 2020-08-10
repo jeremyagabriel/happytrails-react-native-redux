@@ -7,7 +7,7 @@ import useSignIn from '../hooks/useSignIn'
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const errorMessage = useSelector(state => state.signInError)
+  const errorMessage = useSelector(state => state.auth.signInError)
   const [signInCall] = useSignIn()
 
   return(

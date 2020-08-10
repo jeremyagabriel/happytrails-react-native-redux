@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { setTrailCurrent } from '../store/actions'
+import { setTrailCurrent } from '../store/trail/actions'
 
 export default () => {
   const dispatch = useDispatch()
