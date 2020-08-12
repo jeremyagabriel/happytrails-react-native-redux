@@ -4,15 +4,19 @@ import { Button, Input, Text } from 'react-native-elements'
 import { useSelector } from 'react-redux'
 import useSignIn from '../hooks/useSignIn'
 import useAuthorize from '../hooks/useAuthorize'
-import test from '../hooks/test'
+// import { signInCall } from '../hooks/test'
 
 const SignInScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const errorMessage = useSelector(state => state.auth.signInError)
-  // const [signInCall] = useSignIn()
-  const [signInCall] = test()
+  const [signInCall] = useSignIn()
+  // const [signInCall] = test()
   // const [signInCall] = useAuthorize()
+
+  const handleSignIn = () => {
+    signInCall({ email, password })
+  }
 
   return(
     <View style={styles.container}>

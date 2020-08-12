@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux'
 const SearchScreen = () => {
   const [lat, setLat] = useState()
   const [lon, setLon] = useState()
-  const [getTrails] = useTrailResults()
+  const [getTrailResultsCall] = useTrailResults()
   const trailResults = useSelector(state => state.search.trailResults)
 
   return(
@@ -28,7 +28,7 @@ const SearchScreen = () => {
       <View style={styles.submitWrapper}>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => getTrails(lat, lon)}
+          onPress={() => getTrailResultsCall(lat, lon)}
         >
           <Text style={styles.submit}>Submit</Text>
         </TouchableOpacity>

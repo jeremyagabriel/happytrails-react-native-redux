@@ -1,7 +1,7 @@
 import * as Actions from './actionTypes'
 
 const initialState = {
-  trailCurrent: null,
+  trailCurrent: {},
   trailLat: 0,
   trailLon: 0
 }

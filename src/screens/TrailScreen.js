@@ -2,15 +2,27 @@ import React, { useEffect } from 'react'
 import { StyleSheet, Text, View, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import useTrailProfile from '../hooks/useTrailProfile'
-import { useSelector } from 'react-redux'
+import useFavorite from '../hooks/useFavorite'
+import { useSelector, useDispatch } from 'react-redux'
+import { setTrailLocation } from '../store/trail/actions'
 
-const TrailScreen = ({ route }) => {
-  const [getTrail] = useTrailProfile()
+const TrailScreen = ({ route, navigation }) => {
+  const [getTrailCall] = useTrailProfile()
   const { id } = route.params
   const trailCurrent = useSelector(state => state.trail.trailCurrent)
+  const { latitude, longitude } = trailCurrent
+  const [addToFavorites, removeFromFavorites] = useFavorite()
+  const dispatch = useDispatch()
+
+  // if (trailCurrent === null || trailFavoriteIds === null) {
+  //   return (
+  //     <Text>Loading...</Text>
+  //   )
+  // }
 
   useEffect(() => {
-    getTrail(id)
+    console.log("On trail screen")
+    getTrailCall(id)
   },[])
 
   return(
@@ -19,6 +31,13 @@ const TrailScreen = ({ route }) => {
       <Text style={styles.title}>{trailCurrent.name}</Text>
       <Button
         title="Add to Favorites"
+      />
+      <Button
+        title="Open Map"
+        onPress={() => {
+          dispatch(setTrailLocation(latitude, longitude))
+          navigation.navigate('Map')
+        }}
       />
     </View>
   )

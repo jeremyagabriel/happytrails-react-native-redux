@@ -1,4 +1,6 @@
+import * as Actions from './actionTypes'
+
 export const setTrailResults = trails => ({
-  type: SET_TRAIL_RESULTS,
+  type: Actions.SET_TRAIL_RESULTS,
   payload: trails
 })
