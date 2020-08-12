@@ -7,7 +7,7 @@ const favoriteSchema = new mongoose.Schema({
   },
   trailId: {
     type: Number,
-    default: ''
+    required: true
   }
 })
 

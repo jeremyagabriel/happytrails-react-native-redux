@@ -3,12 +3,14 @@ import { StyleSheet, View } from 'react-native'
 import { useSelector } from 'react-redux'
 import { Button, Input, Text } from 'react-native-elements'
 import useSignUp from '../hooks/useSignUp'
+import useAuthorize from '../hooks/useAuthorize'
 
 const SignUpScreen = ({ navigation }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const errorMessage = useSelector(state => state.auth.signUpError)
   const [signUp] = useSignUp()
+  // const [signUpCall] = useAuthorize()
 
   return(
     <View style={styles.container}>
