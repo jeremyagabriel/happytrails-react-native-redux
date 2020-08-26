@@ -1,34 +1,39 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Button } from 'react-native'
 import TrailsList from '../components/TrailsList'
 import SearchBarComponent from '../components/SearchBar'
 import useTrailResults from '../hooks/useTrailResults'
 import { useSelector } from 'react-redux'
+import { apiGetCoordinates } from '../services/mapbox'
 
 const SearchScreen = () => {
-  const [lat, setLat] = useState()
-  const [lon, setLon] = useState()
+  const [location, setLocation] = useState('')
   const [getTrailResultsCall] = useTrailResults()
   const trailResults = useSelector(state => state.search.trailResults)
+
+  const handleSubmit = async () => {
+    if (location.length === 0) return
+
+    try {
+      const coords = await apiGetCoordinates(location)
+      
+      getTrailResultsCall(coords.lat, coords.lon)
+    } catch (err) {
+      console.log('Unable to submit location to server:',err)
+    }
+  }
 
   return(
     <ScrollView style={styles.container}>
       <SearchBarComponent
-        placeholder='Latitude'
-        handleChange={setLat}
-        value={lat}
+        placeholder='Location'
+        handleChange={setLocation}
+        value={location}
       />
-
-      <SearchBarComponent
-        placeholder='Longitude'
-        handleChange={setLon}
-        value={lon}
-      />
-      
       <View style={styles.submitWrapper}>
         <TouchableOpacity
           style={styles.submitButton}
-          onPress={() => getTrailResultsCall(lat, lon)}
+          onPress={handleSubmit}
         >
           <Text style={styles.submit}>Submit</Text>
         </TouchableOpacity>
