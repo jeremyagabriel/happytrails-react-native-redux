@@ -1,12 +1,10 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-const FavoritesScreen = props => {
+const TrackScreen = props => {
   return(
     <View style={styles.container}>
-      {/*<TrailsList 
-        trailResults={trailResults}
-      />*/}
+      <Text>Track Your Hikes</Text>
     </View>
   )
 }
@@ -19,4 +17,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default FavoritesScreen
+export default TrackScreen

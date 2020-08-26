@@ -1,19 +1,28 @@
-import React, { useState } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, ScrollView, Button } from 'react-native'
+import React, { useState, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
+import { StyleSheet, ScrollView } from 'react-native'
 import TrailsList from '../components/TrailsList'
 import SearchBarComponent from '../components/SearchBar'
+import ButtonComponent from '../components/Button'
 import useTrailResults from '../hooks/useTrailResults'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { apiGetCoordinates } from '../services/mapbox'
+import { setTrailCurrent } from '../store/trail/actions'
 
 const SearchScreen = () => {
   const [location, setLocation] = useState('')
   const [getTrailResultsCall] = useTrailResults()
   const trailResults = useSelector(state => state.search.trailResults)
+  const dispatch = useDispatch()
+
+  useFocusEffect(
+    useCallback(() => {
+      dispatch(setTrailCurrent(null))
+    }, [])
+  )
 
   const handleSubmit = async () => {
-    if (location.length === 0) return
-
+    if (location.length <= 1) return
     try {
       const coords = await apiGetCoordinates(location)
       
@@ -30,14 +39,11 @@ const SearchScreen = () => {
         handleChange={setLocation}
         value={location}
       />
-      <View style={styles.submitWrapper}>
-        <TouchableOpacity
-          style={styles.submitButton}
-          onPress={handleSubmit}
-        >
-          <Text style={styles.submit}>Submit</Text>
-        </TouchableOpacity>
-      </View>
+
+      <ButtonComponent 
+        title='Submit'
+        handleSubmit={handleSubmit}
+      />
       
       <TrailsList 
         trailResults={trailResults}
@@ -51,21 +57,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     paddingTop: 5,
     flex: 1
-  },
-  title: {
-    fontSize: 30
-  },
-  submit: {
-    fontSize: 20,
-    backgroundColor: '#1ba274',
-    borderRadius: 5,
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 10
-  },
-  submitWrapper: {
-    alignItems: 'center'
   }
 })
 

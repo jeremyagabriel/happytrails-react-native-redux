@@ -10,20 +10,22 @@ const TrailScreen = ({ route, navigation }) => {
   const [getTrailCall] = useTrailProfile()
   const { id } = route.params
   const trailCurrent = useSelector(state => state.trail.trailCurrent)
-  const { latitude, longitude } = trailCurrent
   const [addToFavorites, removeFromFavorites] = useFavorite()
   const dispatch = useDispatch()
-
-  // if (trailCurrent === null || trailFavoriteIds === null) {
-  //   return (
-  //     <Text>Loading...</Text>
-  //   )
-  // }
 
   useEffect(() => {
     console.log("On trail screen")
     getTrailCall(id)
   },[])
+  
+  if (trailCurrent === null) {
+    return (
+      <Text>Loading...</Text>
+    )
+  }
+
+  const { latitude, longitude } = trailCurrent
+  
 
   return(
     <View style={styles.container}>

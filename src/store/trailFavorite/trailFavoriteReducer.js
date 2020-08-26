@@ -6,7 +6,7 @@ const initialState = {
   trailLon: 0
 }
 
-export const trailReducer = (state = initialState, action) => {
+export const trailFavoriteReducer = (state = initialState, action) => {
   switch (action.type) {
     case Actions.SET_TRAIL_CURRENT:
       return {...state, trailCurrent: action.payload}
