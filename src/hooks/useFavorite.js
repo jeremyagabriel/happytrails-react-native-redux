@@ -58,5 +58,5 @@ export default () => {
   //   }
   // }
 
-  return [getFavoriteIds]
+  return [getFavoriteIds, addToFavorites]
 }

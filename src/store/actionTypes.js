@@ -1,8 +1,0 @@
-export const SIGNIN = 'SIGNIN'
-export const SIGNOUT = 'SIGNOUT'
-export const SET_TRAIL_CURRENT = 'SET_TRAIL_CURRENT'
-export const SET_TRAIL_RESULTS = 'SET_TRAIL_RESULTS'
-export const SET_TRAIL_FAVORITES = 'SET_TRAIL_FAVORITES'
-export const ADD_SIGNUP_ERROR = 'ADD_SIGNUP_ERROR'
-export const ADD_SIGNIN_ERROR = 'ADD_SIGNIN_ERROR'
-export const SIGNUP = 'SIGNUP'

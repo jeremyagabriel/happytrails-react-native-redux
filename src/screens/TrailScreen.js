@@ -3,22 +3,37 @@ import { StyleSheet, Text, View, Image } from 'react-native'
 import { Button } from 'react-native-elements'
 import useTrailProfile from '../hooks/useTrailProfile'
 import useFavorite from '../hooks/useFavorite'
+import useAddToFavorites from '../hooks/favorites/useAddToFavorites'
+import useRemoveFromFavorites from '../hooks/favorites/useRemoveFromFavorites'
+import useGetFavoriteIds from '../hooks/favorites/useGetFavoriteIds'
 import { useSelector, useDispatch } from 'react-redux'
 import { setTrailLocation } from '../store/trail/actions'
 
 const TrailScreen = ({ route, navigation }) => {
   const [getTrailCall] = useTrailProfile()
+  const [addToFavorites] = useAddToFavorites()
+  const [removeFromFavorites] = useRemoveFromFavorites()
+  const [getFavoriteIds] = useGetFavoriteIds()
   const { id } = route.params
   const trailCurrent = useSelector(state => state.trail.trailCurrent)
-  const [addToFavorites, removeFromFavorites] = useFavorite()
+  const trailFavoriteIds = useSelector(state => state.favorites.trailFavoriteIds)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
     console.log("On trail screen")
     getTrailCall(id)
   },[])
+
+  useEffect(() => {
+    getFavoriteIds()
+  }, [trailFavoriteIds])
+
+  const handleFavorite = () => {
+    trailFavoriteIds.includes(id) ? removeFromFavorites(id) : addToFavorites(id)
+  }
   
-  if (trailCurrent === null) {
+  if (trailCurrent === null || trailFavoriteIds === null) {
     return (
       <Text>Loading...</Text>
     )
@@ -30,9 +45,11 @@ const TrailScreen = ({ route, navigation }) => {
   return(
     <View style={styles.container}>
       <Image style={styles.image} source={{uri: trailCurrent.imgMedium}} />
+      <Text>{trailFavoriteIds.join(", ")}</Text>
       <Text style={styles.title}>{trailCurrent.name}</Text>
       <Button
-        title="Add to Favorites"
+        title={trailFavoriteIds.includes(id) ? "Favorited" : "Favorite"}
+        onPress={handleFavorite}
       />
       <Button
         title="Open Map"
