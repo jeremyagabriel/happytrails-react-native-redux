@@ -1,7 +1,7 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import FavoritesScreen from '../screens/FavoritesScreen'
-import TrailScreen from '../screens/TrailScreen'
+import TrailFavoriteScreen from '../screens/TrailFavoriteScreen'
 import MapScreen from '../screens/MapScreen'
 
 const Stack = createStackNavigator()
@@ -14,8 +14,8 @@ const FavoritesNavigator = () => {
         component={FavoritesScreen}
       />
       <Stack.Screen
-        name="Trail"
-        component={TrailScreen}
+        name="TrailFavorite"
+        component={TrailFavoriteScreen}
       />
       <Stack.Screen
         name="Map"
